@@ -30,14 +30,9 @@ public class TareaController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Optional<Tarea>> actualizar (@PathVariable Long id, @RequestBody Tarea tarea) {
+    public ResponseEntity<Tarea> actualizar (@PathVariable Long id, @RequestBody Tarea tarea) {
         Optional<Tarea> tareaActualizada = tareaService.actualizarTarea(id, tarea);
-
-        if (tareaActualizada.isEmpty()) {
-            return ResponseEntity.status(404).build();
-        }
-        return ResponseEntity.status(200).body(tareaActualizada);
-
+        return tareaActualizada.map(value -> ResponseEntity.status(200).body(value)).orElseGet(() -> ResponseEntity.status(404).build());
     }
 
     @DeleteMapping("/{id}")
