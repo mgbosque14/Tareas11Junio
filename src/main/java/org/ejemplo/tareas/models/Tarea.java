@@ -1,16 +1,21 @@
 package org.ejemplo.tareas.models;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+
+@Entity
 public class Tarea {
 
+    @Id
+    @GeneratedValue(strategy =  GenerationType.IDENTITY)
     private Long id;
+
     private String titulo;
     private boolean completada;
 
-    public Tarea(Long id, String titulo, boolean completada) {
-        this.id = id;
-        this.titulo = titulo;
-        this.completada = completada;
-    }
+    public Tarea() {}
 
     public Long getId() {
         return id;
